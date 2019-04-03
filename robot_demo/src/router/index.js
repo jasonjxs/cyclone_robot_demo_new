@@ -1,0 +1,78 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+import Main from '../views/Main'
+import Home from '../views/robot/HomePage'
+import Process from '../views/robot/ProcessPage'
+import Command from '../views/robot/CommandPage'
+import Machine from '../views/robot/MachinePage'
+import FeedBack from '../views/robot/FeedBackPage'
+import Monitor from '../views/robot/MonitorPage'
+import TaskHistory from '../views/robot/TaskHistoryPage'
+import TaskRecovery from '../views/robot/TaskRecoveryPage'
+import UserManage from '../views/robot/UserManagePage'
+import UserRole from '../views/robot/UserRolePage'
+
+Vue.use(Router)
+
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      name: '首页',
+      component: Main,
+      children:[
+        {
+          path: '/home',
+          name: '首页',
+          component: Home
+        },
+        {
+          path: '/process',
+          name: '流程管理',
+          component: Process
+        },
+        {
+          path: '/command',
+          name: '口令管理',
+          component: Command
+        },
+        {
+          path: '/machine',
+          name: '机器管理',
+          component: Machine
+        },
+        {
+          path: '/feedback',
+          name: '用户反馈',
+          component: FeedBack
+        },
+        {
+          path: '/monitor',
+          name: '资源监控',
+          component: Monitor
+        },
+        {
+          path: '/taskhistory',
+          name: '历史任务',
+          component: TaskHistory
+        },
+        {
+          path: '/taskrecovery',
+          name: '回收策略',
+          component: TaskRecovery
+        },
+        {
+          path: '/usermanage',
+          name: '用户管理',
+          component: UserManage
+        },
+        {
+          path: '/userrole',
+          name: '角色管理',
+          component: UserRole
+        },
+      ]
+    },
+
+  ]
+})
