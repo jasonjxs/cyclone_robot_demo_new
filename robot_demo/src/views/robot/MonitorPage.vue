@@ -3,7 +3,7 @@
 
     <div slot="slotLeftTitle">
       <i class="el-icon-tickets"></i>
-      <span>服务器列表</span>
+      <span class="spTitle">服务器列表</span>
     </div>
 
     <div slot="slotLeftRefresh">
@@ -37,7 +37,7 @@
 
     <div slot="slotRightTitle">
       <i class="el-icon-service"></i>
-      <span>监控区</span>
+      <span class="spTitle">监控区</span>
     </div>
 
     <div slot="slotRightInfo">

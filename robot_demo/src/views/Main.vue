@@ -45,4 +45,8 @@
     height: calc(100vh - 70px);
   }
 
+  .spTitle{
+    font-weight: bold;
+  }
+
 </style>

@@ -7,10 +7,11 @@ import Command from '../views/robot/CommandPage'
 import Machine from '../views/robot/MachinePage'
 import FeedBack from '../views/robot/FeedBackPage'
 import Monitor from '../views/robot/MonitorPage'
-import TaskHistory from '../views/robot/TaskHistoryPage'
-import TaskRecovery from '../views/robot/TaskRecoveryPage'
+import ScriptHistory from '../views/robot/ScriptHistoryPage'
+import ScriptRecovery from '../views/robot/ScriptRecoveryPage'
 import UserManage from '../views/robot/UserManagePage'
 import UserRole from '../views/robot/UserRolePage'
+import TaskMonitor from '../views/robot/TaskMonitorPage'
 
 Vue.use(Router)
 
@@ -52,14 +53,14 @@ export default new Router({
           component: Monitor
         },
         {
-          path: '/taskhistory',
-          name: '历史任务',
-          component: TaskHistory
+          path: '/scripthistory',
+          name: '历史脚本',
+          component: ScriptHistory
         },
         {
-          path: '/taskrecovery',
+          path: '/scriptrecovery',
           name: '回收策略',
-          component: TaskRecovery
+          component: ScriptRecovery
         },
         {
           path: '/usermanage',
@@ -70,6 +71,11 @@ export default new Router({
           path: '/userrole',
           name: '角色管理',
           component: UserRole
+        },
+        {
+          path: '/taskmonitor',
+          name: '任务监控',
+          component: TaskMonitor
         },
       ]
     },

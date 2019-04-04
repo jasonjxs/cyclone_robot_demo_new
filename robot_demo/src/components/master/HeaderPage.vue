@@ -42,11 +42,12 @@
           // {index: 'command', title: '口令管理', children: []},
           // {index: 'machine', title: '机器管理', children: []},
           // {index: 'feedback', title: '用户反馈', children: []},
+          {index: 'taskmonitor', title: '任务监控', children: []},
           {index: 'monitor', title: '资源监控', children: []},
           {
-            index: 'task', title: '任务管理', children: [
-              {index: 'taskhistory', title: '历史任务', children: []},
-              {index: 'taskrecovery', title: '回收策略', children: []},
+            index: 'scripthistory', title: '脚本管理', children: [
+              // {index: 'scripthistory', title: '历史脚本', children: []},
+              // {index: 'scriptrecovery', title: '回收策略', children: []},
             ]
           },
           // {
