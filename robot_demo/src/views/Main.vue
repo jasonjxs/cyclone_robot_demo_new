@@ -49,4 +49,8 @@
     font-weight: bold;
   }
 
+  .el-input{
+    width: 200px;
+  }
+
 </style>
