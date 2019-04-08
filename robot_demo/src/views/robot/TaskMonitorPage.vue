@@ -10,8 +10,8 @@
           <div class="divGroupTopLeftContent">
             <div class="divGroupTopLeftSearch">
               <div>
-                <el-input v-model="searchModel.taskName" size="small" placeholder="任务名称"></el-input>
-                <el-select v-model="searchModel.taskStatus" no-data-text="正在作业" size="small" placeholder="请选择">
+                <el-input v-model="searchModel.taskName" style="width: 150px" size="small" placeholder="任务名称"></el-input>
+                <el-select v-model="searchModel.taskStatus" style="width: 150px"  no-data-text="正在作业" size="small" placeholder="请选择">
                   <el-option key="0" label="全部" :value="0"></el-option>
                   <el-option key="1" label="作业中" :value="1"></el-option>
                   <el-option key="2" label="已完成" :value="2"></el-option>
@@ -19,15 +19,15 @@
                   <el-option key="4" label="执行错误" :value="4"></el-option>
                 </el-select>
               </div>
-              <el-button size="small" style="width: 80px">搜索</el-button>
+              <el-button size="small" style="width: 70px">搜索</el-button>
             </div>
-            <el-table :data="rpaData" size="small" style="width: 100%">
+            <el-table :data="rpaData" size="small" style="width: 100%; overflow: hidden" :height="taskTableHeight">
               <el-table-column type="expand">
                 <template slot-scope="props">
-                  <el-table slot="description" :data="props.row.processStep" style="width: 100%"
+                  <el-table slot="description" :data="props.row.processStep" :height="212"
                             :row-class-name="tableRowClassName" header-cell-class-name="branchTableHeadCellClass"
                             :border="true" size="mini">
-                    <el-table-column prop="id" label="分支任务ID" width="90px"></el-table-column>
+                    <el-table-column prop="id" label="分支任务ID" width="100px"></el-table-column>
                     <el-table-column prop="branchTaskName" label="分支任务名" show-overflow-tooltip></el-table-column>
                     <el-table-column label="状态" width="100px">
                       <template slot-scope="scope">
@@ -78,7 +78,7 @@
                     <img src="../../assets/taskStart.png" v-else-if="item.status==1" height="40" width="40"/>
                     <img src="../../assets/taskSuccessed.png" v-else-if="item.status==2" height="40" width="40"/>
                     <div style="margin-left: 20px ;width: 100%">
-                      <span class="spMsg">
+                      <span class="spMsg" maxLen="10">
                         <span>{{item.taskName}}</span> 中的
                         <span>{{ item.branchTaskName }}</span> 在
                         <span>{{item.machineName}} </span>上
@@ -206,6 +206,7 @@
           taskName: '',
           taskStatus: 1,
         },
+        taskTableHeight:document.body.scrollHeight -550,
         rpaMsgData: [
           {
             id: '1',
@@ -727,21 +728,6 @@
 
   }
 
-  .demo-table-expand {
-    font-size: 0;
-  }
-
-  .demo-table-expand label {
-    width: 90px;
-    color: #99a9bf;
-  }
-
-  .demo-table-expand .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 50%;
-  }
-
   .taskMonitor {
     width: 100%;
     height: 100%;
@@ -750,15 +736,16 @@
   }
 
   .taskMonitor .elrowBottom {
-    height: 260px;
+    height: 270px;
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
-    overflow: hidden;
+    margin-top: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .taskMonitor .elrowBottom .el-col {
-    width: calc(50% - 10px);
+    /*width: calc(50% - 10px);*/
     margin-left: 20px;
   }
 
@@ -780,7 +767,7 @@
   }
 
   .taskMonitor .elrowBottom .elcardBottomInfo li {
-    height: 30px;
+    height: 20px;
     margin-top: 10px;
     font-weight: bold;
     font-size: 13px;
@@ -809,11 +796,12 @@
   }
 
   .taskMonitor .divGroupTopLeft {
-    width: 70%;
+    width: calc(100% - 350px);
+    overflow: hidden;
   }
 
   .taskMonitor .divGroupTopRight {
-    width: 30%;
+    width: 350px;
     margin-left: 10px;
   }
 
@@ -833,7 +821,7 @@
   }
 
   .taskMonitor .spMsg {
-    font-size: 13px;
+    font-size: 12px;
     display: block;
   }
 
