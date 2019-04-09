@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 70px;background-color: #1c74d1;overflow: hidden;margin-right: 16px">
+  <div style="height: 70px;background-color: #1c74d1;overflow: hidden">
     <el-menu
       :default-active="onRoutes"
       class="el-menu-demo"

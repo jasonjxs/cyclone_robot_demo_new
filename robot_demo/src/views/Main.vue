@@ -35,14 +35,14 @@
   .bottom{
     background: none repeat scroll 0 0 #E9EEF3;
     position: absolute;
-    padding: 20px 60px ;
-    right: 8px;
-    left: 8px;
-    bottom: 2px;
+    padding: 20px 60px;
+    top: 70px;
+    right: 0;
+    left: 0;
+    bottom: 0;
     width: auto;
     box-sizing: border-box;
     overflow-y: hidden;
-    height: calc(100vh - 70px);
   }
 
   .spTitle{

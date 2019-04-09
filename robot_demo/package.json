@@ -20,7 +20,8 @@
     "less-loader": "^4.1.0",
     "v-charts": "^1.19.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "fastclick": "^1.0.6"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

@@ -6,10 +6,11 @@ import router from './router'
 import ElementUI from 'element-ui'
 import App from './App'
 import VCharts from 'v-charts'
+import FastClick from 'fastclick'
+
 Vue.use(ElementUI)
 Vue.use(VCharts)
-
-
+FastClick.attach(document.body)
 
 /* eslint-disable no-new */
 new Vue({
