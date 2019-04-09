@@ -153,7 +153,7 @@
   import LRStructMaster from '../../components/master/LRStructMaster'
 
   export default {
-    data () {
+    data() {
       this.hourChartSettings = {
         // axisSite: { right: ['关机'] },
         yAxisType: ['KMB', 'percent'],
@@ -234,30 +234,6 @@
         hourChartData: {
           columns: ['小时', '作业', '空闲', '关机'],
           rows: [
-            {'小时': '0', '作业': 23, '空闲': 30, '关机': 7},
-            {'小时': '1', '作业': 60, '空闲': 0, '关机': 0},
-            {'小时': '2', '作业': 0, '空闲': 60, '关机': 0},
-            {'小时': '3', '作业': 10, '空闲': 30, '关机': 20},
-            {'小时': '4', '作业': 40, '空闲': 10, '关机': 10},
-            {'小时': '5', '作业': 55, '空闲': 5, '关机': 0},
-            {'小时': '6', '作业': 5, '空闲': 30, '关机': 25},
-            {'小时': '7', '作业': 30, '空闲': 0, '关机': 30},
-            {'小时': '8', '作业': 10, '空闲': 20, '关机': 30},
-            {'小时': '9', '作业': 50, '空闲': 5, '关机': 5},
-            {'小时': '10', '作业': 28, '空闲': 12, '关机': 20},
-            {'小时': '11', '作业': 35, '空闲': 25, '关机': 0},
-            {'小时': '12', '作业': 23, '空闲': 30, '关机': 7},
-            {'小时': '13', '作业': 60, '空闲': 0, '关机': 0},
-            {'小时': '14', '作业': 0, '空闲': 60, '关机': 0},
-            {'小时': '15', '作业': 10, '空闲': 30, '关机': 20},
-            {'小时': '16', '作业': 40, '空闲': 10, '关机': 10},
-            {'小时': '17', '作业': 55, '空闲': 5, '关机': 0},
-            {'小时': '18', '作业': 5, '空闲': 30, '关机': 25},
-            {'小时': '19', '作业': 30, '空闲': 0, '关机': 30},
-            {'小时': '20', '作业': 10, '空闲': 20, '关机': 30},
-            {'小时': '21', '作业': 50, '空闲': 5, '关机': 5},
-            {'小时': '22', '作业': 28, '空闲': 12, '关机': 20},
-            {'小时': '23', '作业': 35, '空闲': 25, '关机': 0},
           ]
         },
         dayChartData: {
@@ -299,20 +275,14 @@
     components: {
       LRStructMaster
     },
-    created () {
+    created() {
       this.rpaMachineSelecedOption = this.rpaMachineList[0]
       this.selectDataChanged(this.selectData)
-      for (let index = 0; index < 60; index++) {
-        this.cpuChartData.rows.push({'时间': index, '使用率': Math.floor(Math.random() * 100)})
-        this.storgeChartData.rows.push({'时间': index, '使用率': Math.floor(Math.random() * 100)})
-        this.diskChartData.rows.push({'时间': index, '使用率': Math.floor(Math.random() * 100)})
-        this.netChartData.rows.push({'时间': index, '使用率': Math.floor(Math.random() * 100)})
-        this.linkChartData.rows.push({'时间': index, '使用率': Math.floor(Math.random() * 100)})
-        this.workChartData.rows.push({'时间': index, '使用率': Math.floor(Math.random() * 100)})
-      }
+      this.manyChartData(1);
+      this.initHourChartData(1);
     },
     methods: {
-      rpaMachineClick (id) {
+      rpaMachineClick(id) {
         for (let index in this.rpaMachineList) {
           if (this.rpaMachineList[index].id == id) {
             this.rpaMachineList[index].isSelected = true
@@ -321,8 +291,39 @@
             this.rpaMachineList[index].isSelected = false
           }
         }
+        this.manyChartData(id);
+        this.initHourChartData(id);
       },
-      selectDataChanged (val) {
+      initHourChartData(id) {
+        this.hourChartData.rows = [];
+        for (let i = 0; i < 24; i++) {
+          let totalMinutes = 60;
+          let workMinutes = Math.floor(Math.random() * 60)
+          let freeMinutes = Math.floor(Math.random() * (totalMinutes - workMinutes))
+          let closeMinutes = totalMinutes - workMinutes - freeMinutes
+
+          this.hourChartData.rows[i] = {'小时': '0', '作业': workMinutes, '空闲': freeMinutes, '关机': closeMinutes};
+        }
+        this.selectDataChanged('');
+      },
+      manyChartData(id) {
+        this.cpuChartData.rows = [];
+        this.storgeChartData.rows = [];
+        this.diskChartData.rows = [];
+        this.netChartData.rows = [];
+        this.linkChartData.rows = [];
+        this.workChartData.rows = [];
+
+        for (let index = 0; index < 60; index++) {
+          this.cpuChartData.rows.push({'时间': index, '使用率': Math.floor(Math.random() * 100)})
+          this.storgeChartData.rows.push({'时间': index, '使用率': Math.floor(Math.random() * 100)})
+          this.diskChartData.rows.push({'时间': index, '使用率': Math.floor(Math.random() * 100)})
+          this.netChartData.rows.push({'时间': index, '使用率': Math.floor(Math.random() * 100)})
+          this.linkChartData.rows.push({'时间': index, '使用率': Math.floor(Math.random() * 100)})
+          this.workChartData.rows.push({'时间': index, '使用率': Math.floor(Math.random() * 100)})
+        }
+      },
+      selectDataChanged(val) {
         this.dayChartData.rows = []
         let dayTotalMinutes = {'作业': 0, '空闲': 0, '关机': 0,}
         for (let index in this.hourChartData.rows) {
