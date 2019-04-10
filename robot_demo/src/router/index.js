@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '../views/Main'
 import Home from '../views/robot/HomePage'
+// import Home from '../components/dashboard/dashboard'
 import Process from '../views/robot/ProcessPage'
 import Command from '../views/robot/CommandPage'
 import Machine from '../views/robot/MachinePage'
@@ -12,6 +13,7 @@ import ScriptRecovery from '../views/robot/ScriptRecoveryPage'
 import UserManage from '../views/robot/UserManagePage'
 import UserRole from '../views/robot/UserRolePage'
 import TaskMonitor from '../views/robot/TaskMonitorPage'
+
 
 Vue.use(Router)
 
