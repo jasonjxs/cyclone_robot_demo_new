@@ -3,15 +3,17 @@
     <div class="divGroup">
       <div class="divGroupTop">
         <div class="divGroupTopLeft">
-          <p>
+          <div>
             <i class="el-icon-tickets"></i>
             <span class="spTitle">任务列表</span>
-          </p>
+          </div>
           <div class="divGroupTopLeftContent">
             <div class="divGroupTopLeftSearch">
               <div>
-                <el-input v-model="searchModel.taskName" style="width: 150px" size="small" placeholder="任务名称"></el-input>
-                <el-select v-model="searchModel.taskStatus" style="width: 150px"  no-data-text="正在作业" size="small" placeholder="请选择">
+                <el-input v-model="searchModel.taskName" style="width: 150px" size="small"
+                          placeholder="任务名称"></el-input>
+                <el-select v-model="searchModel.taskStatus" style="width: 150px" no-data-text="正在作业" size="small"
+                           placeholder="请选择">
                   <el-option key="0" label="全部" :value="0"></el-option>
                   <el-option key="1" label="作业中" :value="1"></el-option>
                   <el-option key="2" label="已完成" :value="2"></el-option>
@@ -46,6 +48,7 @@
                                      :percentage="scope.row.completeness"></el-progress>
                       </template>
                     </el-table-column>
+
                   </el-table>
                 </template>
               </el-table-column>
@@ -61,35 +64,44 @@
               </el-table-column>
               <el-table-column label="开始时间" prop="startTime" width="120px"></el-table-column>
               <el-table-column label="结束时间" prop="endTime" width="120px"></el-table-column>
+              <el-table-column label="操作" width="50" align="center" fixed="right">
+                <template slot-scope="scope">
+                  <el-button type="text" size="small" style="font-size: 12px" @click="dialogFormVisible = true">查看
+                  </el-button>
+                  <!--                  <a style="margin-left: 2px">终止</a>-->
+                </template>
+              </el-table-column>
             </el-table>
           </div>
         </div>
         <div class="divGroupTopRight">
-          <p>
+          <div>
             <i class="el-icon-tickets"></i>
             <span class="spTitle">任务消息</span>
-          </p>
+          </div>
           <div class="divGroupTopRightContent">
-            <el-row v-for="(item ,idx) in rpaMsgData" style="margin-top: 10px">
-              <el-col>
-                <el-card style="padding: 0px;height: 80px;">
-                  <div style="display: flex;justify-content:flex-start;">
-                    <img src="../../assets/taskFaild.png" v-if="item.status==4" height="40" width="40"/>
-                    <img src="../../assets/taskStart.png" v-else-if="item.status==1" height="40" width="40"/>
-                    <img src="../../assets/taskSuccessed.png" v-else-if="item.status==2" height="40" width="40"/>
-                    <div style="margin-left: 20px ;width: 100%">
+            <div class="divGroupTopRightContentElRow">
+              <el-row v-for="(item ,idx) in rpaMsgData" style="margin-top: 10px">
+                <el-col>
+                  <el-card style="padding-right: 10px; height: 60px;">
+                    <div style="display: flex;justify-content:flex-start;">
+                      <img src="../../assets/taskFaild.png" v-if="item.status==4" height="30" width="30"/>
+                      <img src="../../assets/taskStart.png" v-else-if="item.status==1" height="30" width="30"/>
+                      <img src="../../assets/taskSuccessed.png" v-else-if="item.status==2" height="30" width="30"/>
+                      <div style="margin-left: 20px ;width: 100%">
                       <span class="spMsg" maxLen="10">
                         <span>{{item.taskName}}</span> 中的
                         <span>{{ item.branchTaskName }}</span> 在
                         <span>{{item.machineName}} </span>上
                         <span>{{ formatterMsg(item) }}</span>
                       </span>
-                      <span class="spMsgTime">{{ item.time }}</span>
+                        <span class="spMsgTime">{{ item.time }}</span>
+                      </div>
                     </div>
-                  </div>
-                </el-card>
-              </el-col>
-            </el-row>
+                  </el-card>
+                </el-col>
+              </el-row>
+            </div>
           </div>
         </div>
       </div>
@@ -143,6 +155,19 @@
         </el-row>
       </div>
     </div>
+
+    <el-dialog title="任务代码" width="900px" :visible.sync="dialogFormVisible">
+      <div class="divDialog">
+        <div class="divDialogGroup">
+
+        </div>
+        <div class="divDialogGroup"></div>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <!--        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>-->
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -163,6 +188,7 @@
           offsetY: 100,
         }
       return {
+        dialogFormVisible: false,
         todayPieChartData: {
           columns: ['状态', '次数'],
           rows: [
@@ -206,7 +232,7 @@
           taskName: '',
           taskStatus: 1,
         },
-        taskTableHeight:document.body.scrollHeight -550,
+        taskTableHeight: document.body.scrollHeight - 505,
         rpaMsgData: [
           {
             id: '1',
@@ -787,29 +813,45 @@
     height: calc(100% - 300px);
     display: flex;
     justify-content: start;
-    background-color: #ffffff;
-    padding: 10px;
+    /*padding: 10px;*/
   }
 
   .taskMonitor .divGroupTopLeft, .taskMonitor .divGroupTopRight {
-    padding: 0 10px 20px 10px;
+    /*padding: 0px 10px 20px 10px;*/
+    /*background-color: red;*/
   }
 
   .taskMonitor .divGroupTopLeft {
-    width: calc(100% - 350px);
+    width: calc(100% - 300px);
     overflow: hidden;
+
   }
 
   .taskMonitor .divGroupTopRight {
-    width: 350px;
-    margin-left: 10px;
+    width: 300px;
+    margin-left: 20px;
+    overflow: hidden;
   }
 
   .taskMonitor .divGroupTopLeftContent, .taskMonitor .divGroupTopRightContent {
-    border: 1px solid #e5e9f2;
+    /*border: 1px solid #e5e9f2;*/
+    background-color: #ffffff;
     padding: 10px 20px;
+    overflow: hidden;
+    height: calc(100% - 55px);
+    margin-top: 10px;
+  }
+
+  .taskMonitor .divGroupTopRightContentElRow {
+    margin-bottom: 10px;
+    height: calc(100vh - 450px);
     overflow: auto;
-    height: calc(100% - 50px);
+    padding-right: 10px;
+    width: 100%;
+  }
+
+  .taskMonitor .divGroupTopRightContentElRow .el-card img {
+    margin-top: -5px;
   }
 
   .taskMonitor .divGroupTopLeftSearch {
@@ -823,6 +865,10 @@
   .taskMonitor .spMsg {
     font-size: 12px;
     display: block;
+    position: absolute;
+    top: 9px;
+    /*right: 10px;*/
+    margin-right: 10px;
   }
 
   .taskMonitor .spMsg span {
@@ -834,8 +880,22 @@
     display: block;
     position: absolute;
     right: 20px;
-    top: 60px;
+    top: 45px;
     font-size: 11px;
     color: #a5a7a9;
   }
+
+  .taskMonitor .divDialog {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .taskMonitor .divDialogGroup {
+    width: 49%;
+    height: 100%;
+    background-color: red;
+  }
+
 </style>

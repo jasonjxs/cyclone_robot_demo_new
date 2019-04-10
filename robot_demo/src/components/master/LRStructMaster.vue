@@ -33,7 +33,7 @@
 
 <style>
   .elcontainer_lrStruct {
-    margin-top: -10px;
+    /*margin-top: -10px;*/
     height: 100%
   }
 

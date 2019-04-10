@@ -35,7 +35,7 @@
   .bottom{
     background: none repeat scroll 0 0 #E9EEF3;
     position: absolute;
-    padding: 20px 60px;
+    padding: 10px 60px;
     top: 70px;
     right: 0;
     left: 0;

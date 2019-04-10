@@ -50,10 +50,10 @@
           </p>
           <ul class="ulBtn">
             <li>
-              <img src="../../assets/close1.jpg" title="关闭执行器"/>
+              <img src="../../assets/close1.jpg" @click="bindData()" title="关闭执行器"/>
             </li>
             <li>
-              <img src="../../assets/restart.png" title="重启执行器"/>
+              <img src="../../assets/restart.png" @click="clearData()" title="重启执行器"/>
             </li>
             <li>
               <img src="../../assets/close.png" title="强制关闭系统"/>
@@ -279,7 +279,7 @@
       this.rpaMachineSelecedOption = this.rpaMachineList[0]
       this.selectDataChanged(this.selectData)
       this.manyChartData(1);
-      this.initHourChartData(1);
+      this.bindHourCharData(1);
     },
     methods: {
       rpaMachineClick(id) {
@@ -292,9 +292,13 @@
           }
         }
         this.manyChartData(id);
-        this.initHourChartData(id);
+        this.hourChartData.rows = [];
+        let t = this;
+        setTimeout(() => {
+          t.bindHourCharData(1)
+        }, 500);
       },
-      initHourChartData(id) {
+      bindHourCharData(id){
         this.hourChartData.rows = [];
         for (let i = 0; i < 24; i++) {
           let totalMinutes = 60;
