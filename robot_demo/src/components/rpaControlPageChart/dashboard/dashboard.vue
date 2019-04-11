@@ -96,7 +96,7 @@ export default {
     margin:0px;
     padding:0px;
     padding-top 5%
-    background url('../../assets/bg.jpg');
+    background url('../../../assets/bg.jpg');
     background-size 100% 100%
 .flex-container.column
     position relative

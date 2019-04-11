@@ -412,8 +412,7 @@
   }
 
   .ulBtn li img {
-    width: 20px;
-    height: 20px;
+    height: 25px;
   }
 
   .ulBtn li:hover {

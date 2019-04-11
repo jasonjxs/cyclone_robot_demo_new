@@ -100,7 +100,7 @@
           全选
         </div>
         <div class="pro" @click="showProPane()">
-          产品<i class="arrow"></i>
+          任务<i class="arrow"></i>
         </div>
       </div>
       <div class="pro_list" v-show="pro_filter_flag">
@@ -124,8 +124,8 @@ export default {
   },
   data() {
     return {
-      startDate: '2015.12.04',
-      endDate: '2016.01.15',
+      startDate: '2019.4.1',
+      endDate: '2019.4.7',
       pro_filter_flag: false,
       selectAll_flag: true,
       pro_list: [],

@@ -1,10 +1,9 @@
-<!-- 柱状图 -->
+<!-- 层叠柱状图 -->
 <style lang="stylus" scoped>
-.columnChart
-  height 800px
-  background url('../../assets/bg.jpg') no-repeat
+.line
+  height 1000px
+  background url('../../../assets/bg.jpg') no-repeat
   background-size 100% 100%
-  color white
   .main
     width 100%
     height calc(100% - 100px)
@@ -12,7 +11,7 @@
 </style>
 
 <template>
-<div class="columnChart">
+<div class="line">
   <v-header :name="name" :legendArr="legendArr" :myChart="myChart"></v-header>
   <v-filter :myChart="myChart" v-if="myChart._dom"></v-filter>
   <div class="main"></div>
@@ -31,7 +30,7 @@ export default {
       legendArr: [],
       color: this.$store.state.color,
       myChart: {},
-      name: '柱状图'
+      name: '周作业状态'
     }
   },
   methods: {
@@ -52,7 +51,7 @@ export default {
   },
   mounted() {
     // 基于准备好的dom，初始化echarts实例
-    this.myChart = echarts.init(document.querySelector('.columnChart .main'));
+    this.myChart = echarts.init(document.querySelector('.line .main'));
     this.myChart.setOption({
       title: {
         show: false
@@ -85,7 +84,7 @@ export default {
             color: 'white'
           }
         },
-        data: ['产品1', '产品2']
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
       }],
       yAxis: [{
         axisLine: {
@@ -115,42 +114,16 @@ export default {
         }
       }],
       series: [{
-        name: '标签1',
-        type: 'bar',
-        data: [2.0, 4.9],
-        barWidth: 16,
-        barGap: 0
+        name: '成功',
+        type: 'line',
+        stack: '总量',
+        data: [220, 182, 191, 234, 290, 330, 310]
       }, {
-        name: '标签2',
-        type: 'bar',
-        data: [2.6, 5.9],
-        barWidth: 16,
-        barGap: 0
-      }, {
-        name: '标签3',
-        type: 'bar',
-        data: [2.0, 6.4],
-        barWidth: 16,
-        barGap: 0
-      }, {
-        name: '标签4',
-        type: 'bar',
-        data: [4.0, 5.9],
-        barWidth: 16,
-        barGap: 0
-      }, {
-        name: '标签5',
-        type: 'bar',
-        data: [5.6, 4.9],
-        barWidth: 16,
-        barGap: 0
-      }, {
-        name: '标签6',
-        type: 'bar',
-        data: [2.0, 3.4],
-        barWidth: 16,
-        barGap: 0
-      }]
+        name: '失败',
+        type: 'line',
+        stack: '总量',
+        data: [150, 232, 201, 154, 190, 330, 410]
+      },  ]
     });
     this._init()
   }

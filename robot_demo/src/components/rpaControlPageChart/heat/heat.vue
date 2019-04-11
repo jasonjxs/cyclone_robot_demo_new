@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios/index'
 import echarts from 'echarts'
 import china from 'echarts/map/js/china'
 import header from '../components/header/header'
@@ -35,7 +35,7 @@ export default {
       })
     },
     _getCityData() {
-      axios.get('static/data/cityData.json').then((res) => {
+      axios.get('static/rpaControlPageChart/data/cityData.json').then((res) => {
         this.geoCoordMap = res.data
       })
     },

@@ -85,8 +85,8 @@ export default {
   color white
   width 100%
   h1
-    flex 0 0 120px
-    font-size 21px
+    /*flex 0 0 120px*/
+    font-size 30px
     font-weight bold
     padding-left 20px
   ul

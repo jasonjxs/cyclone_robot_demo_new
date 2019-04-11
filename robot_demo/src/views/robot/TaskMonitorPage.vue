@@ -157,11 +157,56 @@
     </div>
 
     <el-dialog title="任务代码" width="900px" :visible.sync="dialogFormVisible">
+      <div class="divDialogTaskInfo">
+<!--        <p style="margin-left: 0px">任务名：</p>-->
+        <p style="margin-left: 0px">机器名：RPA1</p>
+        <p>开始时间：2019-01-01 15:03:56</p>
+        <p>结束时间：- -</p>
+        <p>作业状态：<span style="color: blue;">作业中</span></p>
+        <p>正在执行的步骤：<span style="color: blue;">拉取支付宝流水</span></p>
+      </div>
+
       <div class="divDialog">
         <div class="divDialogGroup">
-
+          <p>任务名：任务1</p>
+          <el-steps direction="vertical" :active="activeRpaStepNum" style="height: 400px;">
+            <div v-for="(item,idx) in taskProcessStep">
+              <el-step :title="item.title" style="cursor: pointer;" @click.native="elStepClick(item)">
+                <div slot="title" class="divDialogGroupElStepTitle">
+                  <div style="position: absolute;top: 8px;line-height: 30px; left: 50px;">
+                    <img src="../../assets/taskStepStart.png" v-if="item.nodeType==1" height="20" width="20"/>
+                    <img src="../../assets/taskStepWorking.png" v-else-if="item.nodeType==2" height="20" width="20"/>
+                    <img src="../../assets/taskStepEnd.png" v-else-if="item.nodeType==3" height="20" width="20"/>
+                  </div>
+                  <span>{{ item.title }}</span>
+                </div>
+                <div slot="description" v-if="item.description.length>0"
+                     :class="idx==taskProcessStep.length-1 ? 'divDialogGroupElStepDes-last': 'divDialogGroupElStepDes'">
+                  <span>{{ item.description }}</span>
+                </div>
+              </el-step>
+              <div v-if="idx<taskProcessStep.length-1" class="divDialogGroupStepLine"></div>
+            </div>
+          </el-steps>
         </div>
-        <div class="divDialogGroup"></div>
+        <div class="divDialogGroup">
+          <p>步骤名：{{ activeRpaStepCodeOption.title }}</p>
+          <el-steps direction="vertical" :active="activeRpaStepCodeOption.rpaCode.length">
+            <div style="" v-for="(item,idx) in activeRpaStepCodeOption.rpaCode">
+              <el-step :title="item.title">
+                <div slot="title" class="divDialogGroupElStepTitle">
+                  <span>{{ item.title }}</span>
+                </div>
+                <div slot="description" v-if="item.input.length>0"
+                     :class="idx==activeRpaStepCodeOption.rpaCode.length-1 ? 'divDialogGroupElStepDes-last': 'divDialogGroupElStepDes'" style="text-align: left">
+                  <p>{{ item.input }}</p>
+                  <p>{{ item.output }}</p>
+                </div>
+              </el-step>
+              <div v-if="idx < activeRpaStepCodeOption.rpaCode.length-1" class="divDialogGroupStepLine"></div>
+            </div>
+          </el-steps>
+        </div>
       </div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -188,6 +233,40 @@
           offsetY: 100,
         }
       return {
+        taskProcessStep: [
+          {id: '1', title: '开始', description: '', rpaCode: [
+              {id:1,title:'流程开始',input:'入参@ ',output:'出参@ '}
+            ], nodeType: 1},
+          {id: '2', title: '预处理', description: '', rpaCode: [
+              {id:2,title:'预处理数据',input:'入参@ ',output:'出参@ '}
+            ], nodeType: 2},
+          {id: '3', title: '登录ERP系统', description: '出参（登录是否成功）', rpaCode: [
+              {id:2,title:'打开ERP' ,input:'入参@ {"soft"："ERP.exe"}',output:'出参@ {"code":200}'},
+              {id:3,title:'登录ERP',input:'入参@ {"account"："admin","pwd"："admin"}',output:'出参@ {"code":200}'},
+              {id:4,title:'判断登录是否成功',input:'入参@ {"code":200}',output:'出参@ {"code":200}'},
+            ], nodeType: 2},
+          {id: '4', title: '拉取支付宝流水', description: '出参（支付宝流水集合）', rpaCode: [
+              {id:5,title:'打开浏览器',input:'入参@ {"soft":"chrome.exe"}',output:'出参@ {"code":200}'},
+              {id:6,title:'输入网址',input:'入参@ {"siteaddr"："http://auth.alipay.com"}',output:'出参@ {"code":200}'},
+              {id:7,title:'登录支付宝',input:'入参@ {"account":"jason1234","pwd":"123456"}',output:'出参@ {"code":200}'},
+              {id:8,title:'点击拉取支付宝流水',input:'入参@ {"oper":"alipay_water"}',output:'出参@ {"list":[object]}'},
+              {id:9,title:'存储至本地文件',input:'入参@ {"save_txt":"D:\\alipay_water\\2019-01-01 16:03:23.txt"}',output:'出参@ {"code":200}'},], nodeType: 2},
+          {id: '6', title: '入库', description: '出参（入库是否成功）', rpaCode: [
+              {id:10,title:'打开本地程序',input:'入参@ {"soft":"alipay_water.exe"}',output:'出参@ {"code":200}'},
+              {id:11,title:'存储支付宝流水',input:'入参@ {"file_path":"D:\\alipay_water\\2019-01-01 16:03:23.txt"}',output:'出参@ {"code":200}'},
+            ], nodeType: 2},
+          {id: '7', title: '生成报表并Email', description: '出参（生成是否成功）', rpaCode: [
+              {id:12,title:'打开报表系统',input:'入参@ {"soft":"alipay_water_report.exe"}',output:'出参@ {"code":200}'},
+              {id:13,title:'生成报表',input:'入参@ {"oper":"generate_report","datatime":"2019-01-01"}',output:'出参@ {"code":200}'},
+              {id:14,title:'导出报表',input:'入参@ {"oper":"export_report"}',output:'出参@ {"code":200,"filePath":"D:\\alipay_water_report\\alipay_water_2019-01-01.excel"}'},
+              {id:15,title:'打开outlook',input:'入参@ {"soft":"outlook.exe"}',output:'出参@ {"code":200}'},
+              {id:16,title:'新建邮件',input:'入参@ {"oper":"create_email","title":"2019-01-01支付宝流水","receiver":"123@cyclone-robotics.com","attachment":"alipay_water_2019-01-01.excel"}"}',output:'出参@ {"code":200}'},
+              {id:17,title:'发送邮件',input:'入参@ {"oper":"send_email"}',output:'出参@ {"code":200}'}
+            ], nodeType: 2},
+          {id: '9', title: '任务结束', description: '', rpaCode: [
+              {id:1,title:'任务结束',input:'入参@ ',output:'出参@ '}], nodeType: 3},],
+        activeRpaStepCodeOption:[],
+        activeRpaStepNum:3,
         dialogFormVisible: false,
         todayPieChartData: {
           columns: ['状态', '次数'],
@@ -655,8 +734,14 @@
     components: {},
     created() {
       this.timerInsertMsgData();
+      this.activeRpaStepCodeOption = this.taskProcessStep[this.activeRpaStepNum]
     },
     methods: {
+      elStepClick(row){
+        console.log(row)
+        this.activeRpaStepCodeOption={};
+        this.activeRpaStepCodeOption = row
+      },
       timerInsertMsgData() {
         return setInterval(() => {
           this.insertMsgData()
@@ -893,9 +978,72 @@
   }
 
   .taskMonitor .divDialogGroup {
-    width: 49%;
-    height: 100%;
-    background-color: red;
+    width: 47%;
+    height: 90%;
+    padding: 20px 10px;
+    overflow-x: hidden;
+    border: 1px solid #e5e9f2;
+  }
+
+  .taskMonitor .el-step__main{
+    width: 200px;
+  }
+  .taskMonitor .el-steps {
+    height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+
+  .taskMonitor  .el-step__title.is-finish,.taskMonitor  .el-step__description.is-finish {
+    color: #333333;
+  }
+  .taskMonitor  .el-step__title.is-process,.taskMonitor  .el-step__description.is-process{
+    color: red;
+  }
+
+  .taskMonitor .divDialogGroup .el-step__head {
+    display: none;
+  }
+
+  .taskMonitor .divDialogGroupElStepTitle {
+    background-color: #c4c7c9;
+    padding: 5px 10px;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+
+  }
+
+  .taskMonitor .divDialogTaskInfo {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .taskMonitor .divDialogTaskInfo p {
+    margin-left: 30px;
+
+  }
+
+  .taskMonitor .divDialogGroupElStepDes, .taskMonitor .divDialogGroupElStepDes-last {
+    width: 100%;
+    /*height: 25px;*/
+    border: 1px solid #ebecee;
+    text-align: center;
+    margin-bottom: 3px;
+  }
+
+  .taskMonitor .divDialogGroupElStepDes {
+    padding: 5px 17px;
+  }
+
+  .taskMonitor .divDialogGroupElStepDes-last {
+    padding: 5px 0;
+  }
+
+  .taskMonitor .divDialogGroupStepLine {
+    height: 30px;
+    width: 2px;
+    background-color: #c1c1c1;
+    margin: 0 0 2px 200px
   }
 
 </style>

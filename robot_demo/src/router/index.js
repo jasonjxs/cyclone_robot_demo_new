@@ -13,6 +13,7 @@ import ScriptRecovery from '../views/robot/ScriptRecoveryPage'
 import UserManage from '../views/robot/UserManagePage'
 import UserRole from '../views/robot/UserRolePage'
 import TaskMonitor from '../views/robot/TaskMonitorPage'
+import RPAControl from '../views/robot/RPAControl'
 
 
 Vue.use(Router)
@@ -21,6 +22,7 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect:'/control',
       name: '首页',
       component: Main,
       children:[
@@ -28,6 +30,11 @@ export default new Router({
           path: '/home',
           name: '首页',
           component: Home
+        },
+        {
+          path: '/control',
+          name: '综合监控',
+          component: RPAControl
         },
         {
           path: '/process',

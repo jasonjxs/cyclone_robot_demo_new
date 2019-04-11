@@ -1,18 +1,18 @@
-<!-- 折线图 -->
+<!-- 柱状图 -->
 <style lang="stylus" scoped>
-.multipleColumn
-  height 1000px
-  background url('../../assets/bg.jpg') no-repeat
+.columnChart
+  height 800px
+  background url('../../../assets/bg.jpg') no-repeat
   background-size 100% 100%
+  color white
   .main
     width 100%
     height calc(100% - 100px)
     margin-top -15px
 </style>
 
-
 <template>
-<div class="multipleColumn">
+<div class="columnChart">
   <v-header :name="name" :legendArr="legendArr" :myChart="myChart"></v-header>
   <v-filter :myChart="myChart" v-if="myChart._dom"></v-filter>
   <div class="main"></div>
@@ -30,9 +30,8 @@ export default {
     return {
       legendArr: [],
       color: this.$store.state.color,
-      styleArr: [],
       myChart: {},
-      name: '复杂柱状图'
+      name: '周作业次数'
     }
   },
   methods: {
@@ -53,7 +52,7 @@ export default {
   },
   mounted() {
     // 基于准备好的dom，初始化echarts实例
-    this.myChart = echarts.init(document.querySelector('.multipleColumn .main'))
+    this.myChart = echarts.init(document.querySelector('.columnChart .main'));
     this.myChart.setOption({
       title: {
         show: false
@@ -70,7 +69,7 @@ export default {
       color: this.color,
       calculable: true,
       xAxis: [{
-        name: '产品',
+        name: '任务',
         type: 'category',
         axisLine: {
           show: false
@@ -86,7 +85,7 @@ export default {
             color: 'white'
           }
         },
-        data: ['产品1', '产品2', '产品3', '产品4', '产品5']
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
       }],
       yAxis: [{
         axisLine: {
@@ -116,45 +115,33 @@ export default {
         }
       }],
       series: [{
-        name: '标签1',
-        stack: 'stack1',
+        name: '任务1',
         type: 'bar',
-        data: [2.0, 4.9, 5.9, 3, 6],
+        data: [2, 5,8,6,2,15,2],
         barWidth: 16,
         barGap: 0
       }, {
-        name: '标签2',
-        stack: 'stack2',
+        name: '任务2',
         type: 'bar',
-        data: [2.6, 5.9, 3.6, 6, 8],
+        data: [11, 6,9,8,4,12,5],
         barWidth: 16,
         barGap: 0
       }, {
-        name: '标签3',
-        stack: 'stack3',
+        name: '任务3',
         type: 'bar',
-        data: [2.0, 6.4, 6.0, 4, 5],
+        data: [2,9 ,6,5,7,12,5,],
         barWidth: 16,
         barGap: 0
       }, {
-        name: '标签4',
-        stack: 'stack1',
+        name: '任务4',
         type: 'bar',
-        data: [4.0, 5.9, 3, 3, 6],
+        data: [4, 5,6,8,12,1,6],
         barWidth: 16,
         barGap: 0
       }, {
-        name: '标签5',
-        stack: 'stack2',
+        name: '任务5',
         type: 'bar',
-        data: [5.6, 4.9, 6, 5, 5],
-        barWidth: 16,
-        barGap: 0
-      }, {
-        name: '标签6',
-        stack: 'stack3',
-        type: 'bar',
-        data: [2.0, 3.4, 8],
+        data: [5, 4,9,6,8,4,7],
         barWidth: 16,
         barGap: 0
       }]

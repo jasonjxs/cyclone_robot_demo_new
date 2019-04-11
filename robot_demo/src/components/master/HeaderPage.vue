@@ -37,8 +37,9 @@
     data () {
       return {
         menuList: [
-          {index: 'home', title: '首页', children: []},
-          {index: 'process', title: '流程管理', children: []},
+          // {index: 'home', title: '首页', children: []},
+          {index: 'control', title: '综合监控', children: []},
+          // {index: 'process', title: '流程管理', children: []},
           // {index: 'command', title: '口令管理', children: []},
           // {index: 'machine', title: '机器管理', children: []},
           // {index: 'feedback', title: '用户反馈', children: []},
