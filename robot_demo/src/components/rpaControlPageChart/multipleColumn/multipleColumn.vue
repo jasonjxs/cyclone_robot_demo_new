@@ -79,11 +79,11 @@ export default {
           show: false
         },
         nameTextStyle: {
-          color: 'rgba(255, 255, 255, 0.69)'
+          color: '#6a5757'
         },
         axisLabel: {
           textStyle: {
-            color: 'white'
+            color: '#6a5757'
           }
         },
         data: ['上海', '南京', '北京', '哈尔滨', '天津', '郑州', '成都', '杭州', '苏州', '广州', '重庆']
@@ -100,19 +100,19 @@ export default {
         },
         splitLine: {
           lineStyle: {
-            color: ['rgba(230, 230, 230, 0.2)']
+            color: ['#beb2b2']
           }
         },
         axisLabel: {
           textStyle: {
-            color: 'white',
+            color: '#6a5757',
             fontSize: 14
           }
         },
         name: '数量',
         type: 'value',
         nameTextStyle: {
-          color: 'rgba(255, 255, 255, 0.69)'
+          color: '#6a5757'
         }
       }],
       series: [ {

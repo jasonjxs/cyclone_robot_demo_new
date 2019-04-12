@@ -89,7 +89,7 @@
     transform scale(0.33)
     text-align: center;
     transition:all 0.8s;
-    background rgba(32, 32, 35, 0.5)
+    background #c8cdc580
   .dashboard
     position relative
     width 100%

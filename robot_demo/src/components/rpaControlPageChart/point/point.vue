@@ -105,7 +105,7 @@ export default {
               color: ['#698570', '#AE5548',  '#325B69', '#6D9EA8', '#9CC2B0', '#C98769']
             },
             textStyle: {
-              color: '#fff'
+              color: '#6a5757'
             }
           },
           geo: {

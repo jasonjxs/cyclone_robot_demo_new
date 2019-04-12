@@ -77,11 +77,11 @@ export default {
           show: false
         },
         nameTextStyle: {
-          color: 'rgba(255, 255, 255, 0.69)'
+          color: '#6a5757'
         },
         axisLabel: {
           textStyle: {
-            color: 'white'
+            color: '#6a5757'
           }
         },
         data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
@@ -98,19 +98,19 @@ export default {
         },
         splitLine: {
           lineStyle: {
-            color: ['rgba(230, 230, 230, 0.2)']
+            color: ['#beb2b2']
           }
         },
         axisLabel: {
           textStyle: {
-            color: 'white',
+            color: '#6a5757',
             fontSize: 14
           }
         },
         name: '数量',
         type: 'value',
         nameTextStyle: {
-          color: 'rgba(255, 255, 255, 0.69)'
+          color: '#6a5757'
         }
       }],
       series: [{

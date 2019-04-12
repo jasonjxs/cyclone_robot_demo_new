@@ -5,14 +5,14 @@
   padding 10px 0 0 28px
   font-size 12px
   line-height 11px
-  color white
+  color #2a2717
   z-index 9999
   .myCalendar
     left auto!important
   input
     background transparent
     border none
-    color white
+    color #6a5757
   .timeText
     opacity 0.69
     padding-right 7px
@@ -42,16 +42,16 @@
         width 6px
         height 6px
         margin-left 10px
-        border-left 2px solid white
-        border-bottom 2px solid white
+        border-left 2px solid #6a5757
+        border-bottom 2px solid #6a5757
         transform rotate(-45deg)
   .pro_list
     position absolute
     right 22px
     width 102px
     text-align left
-    background #1e3642
-    font-size 14px
+    background #ccd1ca
+    font-size 12px
     margin-top 22px
     /*max-height 180px*/
     overflow hidden
