@@ -55,7 +55,7 @@ export default {
       }.bind(this))
     },
     _getCityData() {
-      axios.get('../static/rpaControlPageChart/data/cityData.json').then((res) => {
+      axios.get('@/../static/rpaControlPageChart/data/cityData.json').then((res) => {
         this.geoCoordMap = res.data
         this.$nextTick(() => {
           this._getMyChart()
@@ -81,7 +81,7 @@ export default {
       return res;
     },
     _getMyChart() {
-      axios.get('../../../static/rpaControlPageChart/data/point/testData.json').then((res) => {
+      axios.get('@/../static/rpaControlPageChart/data/point/testData.json').then((res) => {
         let options = {
           // backgroundColor: '#404a59',
           title: {

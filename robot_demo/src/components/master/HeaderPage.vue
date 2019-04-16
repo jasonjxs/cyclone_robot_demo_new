@@ -12,7 +12,7 @@
       <div style="display: inline-flex;">
         <div style="display: flex;align-items: center;color:white;margin:5px 80px 0 80px;">
           <img src="../../assets/logo.png" height="35" />
-          <span  style="font-weight: bold;font-size: 22px;width: 154px; margin-left: 20px">机器人监管系统</span>
+          <span style="font-weight: bold;font-size: 22px;white-space:nowrap; margin-left: 20px">机器人监管系统</span>
         </div>
         <template v-for="item in menuList">
           <template v-if="item.children&&item.children.length>0">
