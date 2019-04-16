@@ -1,7 +1,17 @@
 'use strict'
 require('./check-versions')()
-
+const ncp = require('ncp').ncp;
+const macConfig = require('./mac.config')
 process.env.NODE_ENV = 'production'
+
+let platform = 'browser';
+
+// check mac paltform build
+if (process.argv.length >= 3) {
+  if (process.argv[2] === 'mac') {
+    platform = 'mac';
+  }
+}
 
 const ora = require('ora')
 const rm = require('rimraf')
@@ -37,5 +47,18 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
       '  Tip: built files are meant to be served over an HTTP server.\n' +
       '  Opening index.html over file:// won\'t work.\n'
     ))
+
+    if (platform === 'mac') {
+      if (!platform.length) return;
+      console.log('begin to copy dist to cordova project...');
+      const writePath = path.join(macConfig.cordovaPath, 'platforms/ios/www/');
+      rm(writePath, err => {
+        if (err) throw err;
+        ncp(webpackConfig.output.path, writePath, err => {
+          if (err) throw err;
+          console.log('copy file completed.');
+        })
+      })
+    }
   })
 })
