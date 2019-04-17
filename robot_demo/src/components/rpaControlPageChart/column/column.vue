@@ -148,7 +148,7 @@ export default {
     });
     this._init()
   },
-  destroyed: () => {
+  destroyed () {
     this.myChart.dispose();
   }
 }

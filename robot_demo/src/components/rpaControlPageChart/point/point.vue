@@ -205,7 +205,8 @@ export default {
     'v-header': header,
     'v-filter': filter
   },
-  destroyed: () => {
+  destroyed () {
+    console.log('point chart dispose.');
     this.myChart.dispose();
   }
 }
