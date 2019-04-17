@@ -204,6 +204,9 @@ export default {
   components: {
     'v-header': header,
     'v-filter': filter
+  },
+  destroyed: () => {
+    this.myChart.dispose();
   }
 }
 

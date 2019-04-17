@@ -147,6 +147,9 @@ export default {
       }]
     });
     this._init()
+  },
+  destroyed: () => {
+    this.myChart.dispose();
   }
 }
 

@@ -103,6 +103,9 @@ export default {
       window.onresize = this.myChart.resize
       this._init(options)
     });
+  },
+  destroyed: () => {
+    this.myChart.dispose();
   }
 }
 
