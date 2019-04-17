@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 55px;background-color: #1c74d1;overflow: hidden">
+  <div style="height: 80px;background-color: #1c74d1;overflow: hidden">
 
 <!--    background-color="#151515"-->
     <el-menu
@@ -9,10 +9,10 @@
       background-color="#151515"
       text-color="#fff"
       active-text-color="#ffd04b" theme="light" unique-opened router>
-      <div style="display: inline-flex;">
-        <div style="display: flex;align-items: center;color:white;margin:5px 80px 0 80px;">
+      <div style="display: inline-flex; height: 80px">
+        <div style="display: flex;align-items: center;color:white;margin:0px 80px 0 80px;">
           <img src="../../assets/logo.png" height="35" />
-          <span style="font-weight: bold;font-size: 22px;white-space:nowrap; margin-left: 20px">机器人监管系统</span>
+          <span style="font-weight: bold;font-size: 24px;white-space:nowrap; margin-left: 20px">机器人监管系统</span>
         </div>
         <template v-for="item in menuList">
           <template v-if="item.children&&item.children.length>0">
@@ -81,6 +81,7 @@
   }
   .el-menu-item{
     margin: auto 0 auto 5px;
+    font-size: 16px;
   }
   .el-menu.el-menu--horizontal {
      border-bottom: 0;

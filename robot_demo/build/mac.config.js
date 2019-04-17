@@ -1,1 +1,1 @@
-exports.cordovaPath = ''; // '/Users/cyclone-dev/robotDemo'
+exports.cordovaPath = '/Users/cyclone-dev/robotDemo'

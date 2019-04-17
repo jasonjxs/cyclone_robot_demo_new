@@ -47,7 +47,7 @@
   }
 
   .elcontainer_lrStruct .divLeft {
-    width: 280px;
+    width: 640px;
     position: relative;
   }
 

@@ -41,6 +41,9 @@ export default {
       name: 'RPA监控图'
     }
   },
+  destroyed() {
+    this.myChart.dispose();
+  },
   methods: {
     _init(options) {
       this.myChart = echarts.init(document.querySelector('.point .main'))
@@ -49,10 +52,10 @@ export default {
       this.legendArr.forEach((data) => {
         data.selected = true;
       })
-      this.$root.charts.push(this.myChart)
-      window.addEventListener('resize', function() {
-        this.myChart.resize()
-      }.bind(this))
+      // this.$root.charts.push(this.myChart)
+      // window.addEventListener('resize', function() {
+      //   this.myChart.resize()
+      // }.bind(this))
     },
     _getCityData() {
       axios.get('@/../static/rpaControlPageChart/data/cityData.json').then((res) => {

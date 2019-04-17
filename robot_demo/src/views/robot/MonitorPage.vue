@@ -13,8 +13,7 @@
 
     <div slot="slotLeftInfo">
       <div>
-        <el-input v-model="machineName" placeholder="搜索服务器" size="small"
-                  style="width:250px;">
+        <el-input v-model="machineName" placeholder="搜索服务器" size="small"xs>
           <el-button slot="append" icon="el-icon-search"></el-button>
         </el-input>
         <el-row :class="item.isSelected?'elrow-class_hover':'elrow-class'"
@@ -350,13 +349,25 @@
 
 <style>
   .image {
-    width: 40px;
+    width: 60px;
   }
 
   .elcard-class {
-    width: 250px;
-    height: 65px;
+    height: 100px;
   }
+
+  .el-input {
+    width: 340px;
+  }
+
+  /* .el-input {
+    width: 340px;
+    height: 44px;
+  }
+
+  .el-input > input {
+    height: 44px;
+  } */
 
   .divRightInfoGb {
     background-color: #E9EEF3;
@@ -386,7 +397,7 @@
 
   .elcard-class ul li span {
     display: table;
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .divRightInfo_contentTopLeft {

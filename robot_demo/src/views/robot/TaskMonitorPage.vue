@@ -66,7 +66,7 @@
               <el-table-column label="结束时间" prop="endTime" width="120px"></el-table-column>
               <el-table-column label="操作" width="50" align="center" fixed="right">
                 <template slot-scope="scope">
-                  <el-button type="text" size="small" style="font-size: 12px" @click="dialogFormVisible = true">查看
+                  <el-button type="text" size="small" style="font-size: 16px" @click="dialogFormVisible = true">查看
                   </el-button>
                   <!--                  <a style="margin-left: 2px">终止</a>-->
                 </template>
@@ -816,6 +816,14 @@
 </script>
 
 <style>
+  .el-table {
+    font-size: 16px;
+  }
+
+  .el-table .el-tag {
+    font-size: 16px;
+  }
+
 
   .taskMonitor .branchTableRowSuccessClass {
     color: #14ce14;

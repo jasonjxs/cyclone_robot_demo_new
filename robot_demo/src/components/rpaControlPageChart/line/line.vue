@@ -39,15 +39,18 @@ export default {
       this.legendArr.forEach((data) => {
         data.selected = true;
       })
-      this.$root.charts.push(this.myChart)
-      window.addEventListener('resize', function() {
-        this.myChart.resize()
-      }.bind(this))
+      // this.$root.charts.push(this.myChart)
+      // window.addEventListener('resize', function() {
+      //   this.myChart.resize()
+      // }.bind(this))
     }
   },
   components: {
     'v-header': header,
     'v-filter': filter
+  },
+  destroyed() {
+    this.myChart.dispose();
   },
   mounted() {
     // 基于准备好的dom，初始化echarts实例

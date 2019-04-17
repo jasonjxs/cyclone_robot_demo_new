@@ -394,6 +394,11 @@
     border: 0px;
   }
 
+  .scriptHistory .el-table__row {
+    height: 80px;
+    font-size: 18px;
+  }
+
   .scriptHistory .el-submenu {
     border: 2px solid darkgray;
     margin-top: 5px;
@@ -418,7 +423,7 @@
   .scriptHistory .el-submenu .el-menu-item {
     height: 30px;
     line-height: 30px;
-    font-size: 12px;
+    font-size: 18px;
   }
 
   .scriptHistory .divRightInfoTop {
