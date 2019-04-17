@@ -1,7 +1,7 @@
 <template>
   <div class="taskMonitor">
     <div class="divGroup">
-      <el-row :gutter="20">
+      <el-row :gutter="10">
         <el-col :span="18">
           <div>
             <div>
@@ -115,7 +115,7 @@
               <div class="divGroupTopRightContentElRow">
                 <el-row v-for="(item ,idx) in rpaMsgData" style="margin-top: 10px">
                   <el-col>
-                    <el-card style="padding-right: 10px; height: 60px;">
+                    <el-card style="padding-right: 10px; height: 80px;">
                       <div style="display: flex;justify-content:flex-start;">
                         <img
                           src="../../assets/taskFaild.png"
@@ -153,7 +153,7 @@
         </el-col>
       </el-row>
       <div class="divGroupBottom">
-        <el-row :gutter="20">
+        <el-row :gutter="10">
           <el-col :span="6">
             <el-card class="elcardBottomInfo">
               <div slot="header" class="clearfix">
@@ -162,7 +162,7 @@
               <div style="justify-content: center;display: flex;">
                 <ve-pie
                   :data="todayPieChartData"
-                  style="height: 170px;width: 300px;"
+                  style="height: 170px;width: 220px;"
                   :settings="todayPieChartSettings"
                   :colors="todayPieColors"
                 ></ve-pie>
@@ -317,12 +317,18 @@ export default {
     (this.todayPieColors = ["#19d4ae", "#fa6e86", "#008000", "#ffb980"]),
       (this.todayPieChartSettings = {
         radius: 60,
-        offsetY: 100,
-        level: [["成功", "失败"], ["已完成", "待运行"]]
+        offsetY: 120,
+        level: [["成功", "失败"], ["已完成", "待运行"]],
+        label: {
+          show: false
+        }
       }),
       (this.historyPieChartSettings = {
         radius: 60,
-        offsetY: 100
+        offsetY: 120,
+        label: {
+          show: false
+        }
       });
     return {
       taskProcessStep: [
@@ -1177,7 +1183,7 @@ export default {
 }
 
 .taskMonitor .spMsg {
-  font-size: 12px;
+  font-size: 10px;
   display: block;
   position: absolute;
   top: 9px;
@@ -1194,7 +1200,7 @@ export default {
   display: block;
   position: absolute;
   right: 20px;
-  top: 45px;
+  bottom: 4px;
   font-size: 11px;
   color: #a5a7a9;
 }
@@ -1278,5 +1284,9 @@ export default {
 
 .taskMonitor .divGroupBottom {
   margin-top: 20px;
+}
+
+.divGroupBottom .el-card>.el-card__header {
+  padding: 5px 20px;
 }
 </style>

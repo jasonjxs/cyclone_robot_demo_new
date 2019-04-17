@@ -10,7 +10,7 @@
       text-color="#fff"
       active-text-color="#ffd04b" theme="light" unique-opened router>
       <div style="display: inline-flex;">
-        <div style="display: flex;align-items: center;color:white;margin:5px 80px 0 80px;">
+        <div style="display: flex;align-items: center;color:white;margin:0px 80px 0 80px;">
           <img src="../../assets/logo.png" height="35" />
           <span style="font-weight: bold;font-size: 22px;white-space:nowrap; margin-left: 20px">机器人监管系统</span>
         </div>
@@ -76,6 +76,11 @@
 </script>
 
 <style>
+  .title ul>li {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+
   .el-submenu{
     margin: auto 0 auto 5px;
   }

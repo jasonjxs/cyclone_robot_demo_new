@@ -206,7 +206,6 @@ export default {
     'v-filter': filter
   },
   destroyed () {
-    console.log('point chart dispose.');
     this.myChart.dispose();
   }
 }
