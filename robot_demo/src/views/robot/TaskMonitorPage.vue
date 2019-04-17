@@ -1,158 +1,160 @@
 <template>
   <div class="taskMonitor">
     <div class="divGroup">
-      <div class="divGroupTop">
-        <div class="divGroupTopLeft">
+      <el-row :gutter="20">
+        <el-col :span="18">
           <div>
-            <i class="el-icon-tickets"></i>
-            <span class="spTitle">任务列表</span>
-          </div>
-          <div class="divGroupTopLeftContent">
-            <div class="divGroupTopLeftSearch">
-              <div>
-                <el-input
-                  v-model="searchModel.taskName"
-                  style="width: 150px"
-                  size="small"
-                  placeholder="任务名称"
-                ></el-input>
-                <el-select
-                  v-model="searchModel.taskStatus"
-                  style="width: 150px"
-                  no-data-text="正在作业"
-                  size="small"
-                  placeholder="请选择"
-                >
-                  <el-option key="0" label="全部" :value="0"></el-option>
-                  <el-option key="1" label="作业中" :value="1"></el-option>
-                  <el-option key="2" label="已完成" :value="2"></el-option>
-                  <el-option key="3" label="待作业" :value="3"></el-option>
-                  <el-option key="4" label="执行错误" :value="4"></el-option>
-                </el-select>
-              </div>
-              <el-button size="small" style="width: 70px">搜索</el-button>
+            <div>
+              <i class="el-icon-tickets"></i>
+              <span class="spTitle">任务列表</span>
             </div>
-            <el-table
-              :data="rpaData"
-              size="small"
-              style="width: 100%; overflow: hidden"
-              :height="taskTableHeight"
-            >
-              <el-table-column type="expand">
-                <template slot-scope="props">
-                  <el-table
-                    slot="description"
-                    :data="props.row.processStep"
-                    :height="212"
-                    :row-class-name="tableRowClassName"
-                    header-cell-class-name="branchTableHeadCellClass"
-                    :border="true"
-                    size="mini"
-                  >
-                    <el-table-column prop="id" label="分支任务ID" width="100px"></el-table-column>
-                    <el-table-column prop="branchTaskName" label="分支任务名" show-overflow-tooltip></el-table-column>
-                    <el-table-column label="状态" width="100px">
-                      <template slot-scope="scope">
-                        <el-tag
-                          :type="formatterStatusTag(scope.row)"
-                          close-transition
-                        >{{formatterStatutsName(scope.row)}}</el-tag>
-                      </template>
-                    </el-table-column>
-                    <el-table-column prop="machineName" label="机器名" show-overflow-tooltip></el-table-column>
-                    <el-table-column prop="ip" label="IP" show-overflow-tooltip></el-table-column>
-                    <el-table-column prop="startTime" label="开始时间" width="120px"></el-table-column>
-                    <el-table-column prop="endTime" label="结束时间" width="120px"></el-table-column>
-                    <el-table-column label="完成度">
-                      <template slot-scope="scope">
-                        <el-progress
-                          :text-inside="true"
-                          :stroke-width="18"
-                          status="success"
-                          :percentage="scope.row.completeness"
-                        ></el-progress>
-                      </template>
-                    </el-table-column>
-                  </el-table>
-                </template>
-              </el-table-column>
-              <el-table-column label="任务ID" prop="id" width="80px"></el-table-column>
-              <el-table-column label="任务名" prop="taskName" show-overflow-tooltip></el-table-column>
-              <el-table-column label="作业机器名" prop="machineName" show-overflow-tooltip></el-table-column>
-              <el-table-column label="IP" prop="ip" show-overflow-tooltip></el-table-column>
-              <el-table-column label="状态" width="100px">
-                <template slot-scope="scope">
-                  <el-tag
-                    :type="formatterStatusTag(scope.row)"
-                    close-transition
-                  >{{formatterStatutsName(scope.row)}}</el-tag>
-                </template>
-              </el-table-column>
-              <el-table-column label="开始时间" prop="startTime" width="120px"></el-table-column>
-              <el-table-column label="结束时间" prop="endTime" width="120px"></el-table-column>
-              <el-table-column label="操作" width="50" align="center" fixed="right">
-                <template slot-scope="scope">
-                  <el-button
-                    type="text"
+            <div class="divGroupTopLeftContent">
+              <div class="divGroupTopLeftSearch">
+                <div>
+                  <el-input
+                    v-model="searchModel.taskName"
+                    style="width: 150px"
                     size="small"
-                    style="font-size: 12px"
-                    @click="dialogFormVisible = true"
-                  >查看</el-button>
-                  <!--                  <a style="margin-left: 2px">终止</a>-->
-                </template>
-              </el-table-column>
-            </el-table>
-          </div>
-        </div>
-        <div class="divGroupTopRight">
-          <div>
-            <i class="el-icon-tickets"></i>
-            <span class="spTitle">任务消息</span>
-          </div>
-          <div class="divGroupTopRightContent">
-            <div class="divGroupTopRightContentElRow">
-              <el-row v-for="(item ,idx) in rpaMsgData" style="margin-top: 10px">
-                <el-col>
-                  <el-card style="padding-right: 10px; height: 60px;">
-                    <div style="display: flex;justify-content:flex-start;">
-                      <img
-                        src="../../assets/taskFaild.png"
-                        v-if="item.status==4"
-                        height="30"
-                        width="30"
-                      >
-                      <img
-                        src="../../assets/taskStart.png"
-                        v-else-if="item.status==1"
-                        height="30"
-                        width="30"
-                      >
-                      <img
-                        src="../../assets/taskSuccessed.png"
-                        v-else-if="item.status==2"
-                        height="30"
-                        width="30"
-                      >
-                      <div style="margin-left: 20px ;width: 100%">
-                        <span class="spMsg" maxLen="10">
-                          <span>{{item.taskName}}</span> 中的
-                          <span>{{ item.branchTaskName }}</span> 在
-                          <span>{{item.machineName}}</span>上
-                          <span>{{ formatterMsg(item) }}</span>
-                        </span>
-                        <span class="spMsgTime">{{ item.time }}</span>
-                      </div>
-                    </div>
-                  </el-card>
-                </el-col>
-              </el-row>
+                    placeholder="任务名称"
+                  ></el-input>
+                  <el-select
+                    v-model="searchModel.taskStatus"
+                    style="width: 150px"
+                    no-data-text="正在作业"
+                    size="small"
+                    placeholder="请选择"
+                  >
+                    <el-option key="0" label="全部" :value="0"></el-option>
+                    <el-option key="1" label="作业中" :value="1"></el-option>
+                    <el-option key="2" label="已完成" :value="2"></el-option>
+                    <el-option key="3" label="待作业" :value="3"></el-option>
+                    <el-option key="4" label="执行错误" :value="4"></el-option>
+                  </el-select>
+                </div>
+                <el-button size="small" style="width: 70px">搜索</el-button>
+              </div>
+              <el-table
+                :data="rpaData"
+                size="small"
+                style="width: 100%; overflow: hidden"
+                :height="taskTableHeight"
+              >
+                <el-table-column type="expand">
+                  <template slot-scope="props">
+                    <el-table
+                      slot="description"
+                      :data="props.row.processStep"
+                      :height="212"
+                      :row-class-name="tableRowClassName"
+                      header-cell-class-name="branchTableHeadCellClass"
+                      :border="true"
+                      size="mini"
+                    >
+                      <el-table-column prop="id" label="分支任务ID" width="100px"></el-table-column>
+                      <el-table-column prop="branchTaskName" label="分支任务名" show-overflow-tooltip></el-table-column>
+                      <el-table-column label="状态" width="100px">
+                        <template slot-scope="scope">
+                          <el-tag
+                            :type="formatterStatusTag(scope.row)"
+                            close-transition
+                          >{{formatterStatutsName(scope.row)}}</el-tag>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="machineName" label="机器名" show-overflow-tooltip></el-table-column>
+                      <el-table-column prop="ip" label="IP" show-overflow-tooltip></el-table-column>
+                      <el-table-column prop="startTime" label="开始时间" show-overflow-tooltip ></el-table-column>
+                      <el-table-column prop="endTime" label="结束时间" show-overflow-tooltip ></el-table-column>
+                      <el-table-column label="完成度">
+                        <template slot-scope="scope">
+                          <el-progress
+                            :text-inside="true"
+                            :stroke-width="18"
+                            status="success"
+                            :percentage="scope.row.completeness"
+                          ></el-progress>
+                        </template>
+                      </el-table-column>
+                    </el-table>
+                  </template>
+                </el-table-column>
+                <el-table-column label="任务ID" prop="id" width="80px"></el-table-column>
+                <el-table-column label="任务名" prop="taskName" show-overflow-tooltip></el-table-column>
+                <el-table-column label="作业机器名" prop="machineName" show-overflow-tooltip></el-table-column>
+                <el-table-column label="IP" prop="ip" show-overflow-tooltip></el-table-column>
+                <el-table-column label="状态" width="100px">
+                  <template slot-scope="scope">
+                    <el-tag
+                      :type="formatterStatusTag(scope.row)"
+                      close-transition
+                    >{{formatterStatutsName(scope.row)}}</el-tag>
+                  </template>
+                </el-table-column>
+                <el-table-column label="开始时间" prop="startTime" width="120px"></el-table-column>
+                <el-table-column label="结束时间" prop="endTime" width="120px"></el-table-column>
+                <el-table-column label="操作" width="50" align="center" fixed="right">
+                  <template slot-scope="scope">
+                    <el-button
+                      type="text"
+                      size="small"
+                      style="font-size: 12px"
+                      @click="dialogFormVisible = true"
+                    >查看</el-button>
+                    <!--                  <a style="margin-left: 2px">终止</a>-->
+                  </template>
+                </el-table-column>
+              </el-table>
             </div>
           </div>
-        </div>
-      </div>
+        </el-col>
+        <el-col :span="6">
+            <div>
+              <i class="el-icon-tickets"></i>
+              <span class="spTitle">任务消息</span>
+            </div>
+            <div class="divGroupTopRightContent">
+              <div class="divGroupTopRightContentElRow">
+                <el-row v-for="(item ,idx) in rpaMsgData" style="margin-top: 10px">
+                  <el-col>
+                    <el-card style="padding-right: 10px; height: 60px;">
+                      <div style="display: flex;justify-content:flex-start;">
+                        <img
+                          src="../../assets/taskFaild.png"
+                          v-if="item.status==4"
+                          height="30"
+                          width="30"
+                        >
+                        <img
+                          src="../../assets/taskStart.png"
+                          v-else-if="item.status==1"
+                          height="30"
+                          width="30"
+                        >
+                        <img
+                          src="../../assets/taskSuccessed.png"
+                          v-else-if="item.status==2"
+                          height="30"
+                          width="30"
+                        >
+                        <div style="margin-left: 20px ;width: 100%">
+                          <span class="spMsg" maxLen="10">
+                            <span>{{item.taskName}}</span> 中的
+                            <span>{{ item.branchTaskName }}</span> 在
+                            <span>{{item.machineName}}</span>上
+                            <span>{{ formatterMsg(item) }}</span>
+                          </span>
+                          <span class="spMsgTime">{{ item.time }}</span>
+                        </div>
+                      </div>
+                    </el-card>
+                  </el-col>
+                </el-row>
+              </div>
+            </div>
+        </el-col>
+      </el-row>
       <div class="divGroupBottom">
-        <el-row class="elrowBottom">
-          <el-col style="margin-left: 0px">
+        <el-row :gutter="20">
+          <el-col :span="6">
             <el-card class="elcardBottomInfo">
               <div slot="header" class="clearfix">
                 <span style="font-weight: bold">今日任务</span>
@@ -167,7 +169,7 @@
               </div>
             </el-card>
           </el-col>
-          <el-col>
+          <el-col :span="6">
             <el-card class="elcardBottomInfo">
               <div slot="header" class="clearfix">
                 <span style="font-weight: bold">今日RPA机器使用情况</span>
@@ -181,7 +183,7 @@
               </div>
             </el-card>
           </el-col>
-          <el-col>
+          <el-col :span="6">
             <el-card class="elcardBottomInfo">
               <div slot="header" class="clearfix">
                 <span style="font-weight: bold">历史任务</span>
@@ -196,7 +198,7 @@
               </div>
             </el-card>
           </el-col>
-          <el-col>
+          <el-col :span="6">
             <el-card class="elcardBottomInfo">
               <div slot="header" class="clearfix">
                 <span style="font-weight: bold">历史RPA机器使用情况</span>
@@ -1117,7 +1119,7 @@ export default {
 .taskMonitor .divGroup {
   height: 100%;
   width: 100%;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .taskMonitor .divGroupTop {
@@ -1155,7 +1157,7 @@ export default {
 }
 
 .taskMonitor .divGroupTopRightContentElRow {
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   height: calc(100vh - 450px);
   overflow: auto;
   padding-right: 10px;
@@ -1272,5 +1274,9 @@ export default {
   width: 2px;
   background-color: #c1c1c1;
   margin: 0 0 2px 200px;
+}
+
+.taskMonitor .divGroupBottom {
+  margin-top: 20px;
 }
 </style>
