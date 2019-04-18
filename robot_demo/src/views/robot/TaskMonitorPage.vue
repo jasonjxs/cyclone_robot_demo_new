@@ -914,7 +914,7 @@ export default {
         data: ['成功', '失败', '已完成', '待运行'],
       },
       tooltip: {
-        position: ['30%', '77%']
+        position: ['30%', '20%']
       },
       series: [
         {
@@ -936,9 +936,11 @@ export default {
           data: [
             { value: 99, name: '成功' },
             { value: 21, name: '失败' }
-          ]
+          ],
+          center: ['50%', '72%']
         },
         {
+          center: ['50%', '72%'],
           name: '运行状态',
           type: 'pie',
           seletedMode: 'single',
@@ -1008,10 +1010,11 @@ export default {
         data: ['成功', '失败', '未运行'],
       },
       tooltip: {
-        position: ['30%', '77%']
+        position: ['30%', '20%']
       },
       series: [
         {
+          center: ['50%', '72%'],
           name: '任务状态',
           type: 'pie',
           radius: '55%',
