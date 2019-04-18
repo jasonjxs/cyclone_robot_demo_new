@@ -77,11 +77,11 @@
                     </el-table>
                   </template>
                 </el-table-column>
-                <el-table-column label="任务ID" prop="id" width="80px"></el-table-column>
+                <el-table-column label="任务ID" prop="id" width="60px"></el-table-column>
                 <el-table-column label="任务名" prop="taskName" show-overflow-tooltip></el-table-column>
                 <el-table-column label="作业机器名" prop="machineName" show-overflow-tooltip></el-table-column>
-                <el-table-column label="IP" prop="ip" show-overflow-tooltip></el-table-column>
-                <el-table-column label="状态" width="100px">
+                <el-table-column label="IP" prop="ip"></el-table-column>
+                <el-table-column label="状态" width="80px">
                   <template slot-scope="scope">
                     <el-tag
                       :type="formatterStatusTag(scope.row)"
@@ -89,8 +89,8 @@
                     >{{formatterStatutsName(scope.row)}}</el-tag>
                   </template>
                 </el-table-column>
-                <el-table-column label="开始时间" prop="startTime" width="120px"></el-table-column>
-                <el-table-column label="结束时间" prop="endTime" width="120px"></el-table-column>
+                <el-table-column label="开始时间" prop="startTime" width="75px"></el-table-column>
+                <el-table-column label="结束时间" prop="endTime" width="75px"></el-table-column>
                 <el-table-column label="操作" width="50" align="center" fixed="right">
                   <template slot-scope="scope">
                     <el-button
@@ -160,12 +160,7 @@
                 <span style="font-weight: bold">今日任务</span>
               </div>
               <div style="justify-content: center;display: flex;">
-                <ve-pie
-                  :data="todayPieChartData"
-                  style="height: 170px;width: 220px;"
-                  :settings="todayPieChartSettings"
-                  :colors="todayPieColors"
-                ></ve-pie>
+                <div ref="todayPieChart" style="height: 230px; width: 100%;"></div>
               </div>
             </el-card>
           </el-col>
@@ -175,11 +170,7 @@
                 <span style="font-weight: bold">今日RPA机器使用情况</span>
               </div>
               <div style="justify-content: center;display: flex;">
-                <ve-histogram
-                  :data="todayHistogramChartData"
-                  height="250px"
-                  style="height: 170px;width: 300px;"
-                ></ve-histogram>
+              <div ref="todayBarChart" style="height: 230px; width: 100%;"></div>
               </div>
             </el-card>
           </el-col>
@@ -189,12 +180,7 @@
                 <span style="font-weight: bold">历史任务</span>
               </div>
               <div style="justify-content: center;display: flex;">
-                <ve-pie
-                  :data="historyPieChartData"
-                  style="height: 170px;width: 300px;"
-                  :settings="historyPieChartSettings"
-                  :colors="todayPieColors"
-                ></ve-pie>
+                <div ref="historyPieChart" style="height: 230px; width: 100%;"></div>
               </div>
             </el-card>
           </el-col>
@@ -204,11 +190,7 @@
                 <span style="font-weight: bold">历史RPA机器使用情况</span>
               </div>
               <div style="justify-content: center;display: flex;">
-                <ve-histogram
-                  :data="historyHistogramChartData"
-                  height="250px"
-                  style="height: 170px;width: 300px;"
-                ></ve-histogram>
+                <div ref="historyBarChart" style="height: 230px; width: 100%;"></div>
               </div>
             </el-card>
           </el-col>
@@ -312,24 +294,10 @@
 </template>
 
 <script>
+import echarts from 'echarts';
+
 export default {
   data() {
-    (this.todayPieColors = ["#19d4ae", "#fa6e86", "#008000", "#ffb980"]),
-      (this.todayPieChartSettings = {
-        radius: 60,
-        offsetY: 120,
-        level: [["成功", "失败"], ["已完成", "待运行"]],
-        label: {
-          show: false
-        }
-      }),
-      (this.historyPieChartSettings = {
-        radius: 60,
-        offsetY: 120,
-        label: {
-          show: false
-        }
-      });
     return {
       taskProcessStep: [
         {
@@ -495,45 +463,6 @@ export default {
       activeRpaStepCodeOption: [],
       activeRpaStepNum: 3,
       dialogFormVisible: false,
-      todayPieChartData: {
-        columns: ["状态", "次数"],
-        rows: [
-          { 状态: "已完成", 次数: 120 },
-          { 状态: "待运行", 次数: 30 },
-          { 状态: "成功", 次数: 99 },
-          { 状态: "失败", 次数: 21 }
-        ]
-      },
-      historyPieChartData: {
-        columns: ["状态", "次数"],
-        rows: [
-          { 状态: "成功", 次数: 2001 },
-          { 状态: "失败", 次数: 102 },
-          { 状态: "未运行", 次数: 325 }
-        ]
-      },
-      todayHistogramChartData: {
-        columns: ["机器", "次数"],
-        rows: [
-          { 机器: "RPA1", 次数: 28 },
-          { 机器: "RPA2", 次数: 31 },
-          { 机器: "RPA3", 次数: 2 },
-          { 机器: "RPA4", 次数: 10 },
-          { 机器: "RPA5", 次数: 41 },
-          { 机器: "RPA6", 次数: 36 }
-        ]
-      },
-      historyHistogramChartData: {
-        columns: ["机器", "次数"],
-        rows: [
-          { 机器: "RPA1", 次数: 405 },
-          { 机器: "RPA2", 次数: 600 },
-          { 机器: "RPA3", 次数: 98 },
-          { 机器: "RPA4", 次数: 106 },
-          { 机器: "RPA5", 次数: 356 },
-          { 机器: "RPA6", 次数: 789 }
-        ]
-      },
       searchModel: {
         taskName: "",
         taskStatus: 1
@@ -972,9 +901,186 @@ export default {
     this.timerInsertMsgData();
     this.activeRpaStepCodeOption = this.taskProcessStep[this.activeRpaStepNum];
   },
+  mounted() {
+    this.todayPieChart = echarts.init(this.$refs.todayPieChart);
+    this.todayPieChart.setOption({
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b}: {c} ({d}%)'
+      },
+      color: ["#19d4ae", "#fa6e86", "#008000", "#ffb980"],
+      legend: {
+        orient: 'horizontal',
+        data: ['成功', '失败', '已完成', '待运行'],
+      },
+      tooltip: {
+        position: ['30%', '77%']
+      },
+      series: [
+        {
+          name: '运行结果',
+          type: 'pie',
+          seletedMode: 'single',
+          radius: [0, '30%'],
+          label: {
+            normal: {
+              position: 'inner',
+              fontSize: 10
+            }
+          },
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
+          data: [
+            { value: 99, name: '成功' },
+            { value: 21, name: '失败' }
+          ]
+        },
+        {
+          name: '运行状态',
+          type: 'pie',
+          seletedMode: 'single',
+          radius: ['40%', '55%'],
+          label: {
+            normal: {
+              show: false
+            }
+          },
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
+          data: [
+            { value: 120, name: '已完成' },
+            { value: 30, name: '待运行' }
+          ]
+        }
+      ]
+    });
+
+    this.todayBarChart = echarts.init(this.$refs.todayBarChart);
+    this.todayBarChart.setOption({
+      color: ['#19d4ae'],
+      tooltip : {
+          trigger: 'axis',
+          axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+              type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+          },
+          position: ['30%', 0]
+      },
+      grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+      },
+      xAxis : [
+          {
+              type : 'category',
+              data : ['RPA1', 'RPA2', 'RPA3', 'RPA4', 'RPA5', 'RPA6'],
+              axisTick: {
+                  alignWithLabel: true
+              }
+          }
+      ],
+      yAxis : [
+          {
+              type : 'value'
+          }
+      ],
+      series : [
+          {
+              name:'次数',
+              type:'bar',
+              data:[28, 31, 2, 10, 41, 36],
+          }
+      ]
+    });
+
+    this.historyPieChart = echarts.init(this.$refs.historyPieChart);
+    this.historyPieChart.setOption({
+      color: ["#19d4ae", "#fa6e86", "#008000"],
+      legend: {
+        orient: 'horizontal',
+        data: ['成功', '失败', '未运行'],
+      },
+      tooltip: {
+        position: ['30%', '77%']
+      },
+      series: [
+        {
+          name: '任务状态',
+          type: 'pie',
+          radius: '55%',
+          label: {
+            normal: {
+              show: false
+            }
+          },
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
+          data: [
+            { value: 2001, name: '成功' },
+            { value: 102, name: '失败' },
+            { value: 325, name: '未运行' }
+          ]
+        },
+      ]
+    });
+
+    this.historyBarChart = echarts.init(this.$refs.historyBarChart);
+    this.historyBarChart.setOption({
+      color: ['#19d4ae'],
+      tooltip : {
+          trigger: 'axis',
+          axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+              type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+          },
+          position: ['30%', 0]
+      },
+      grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+      },
+      xAxis : [
+          {
+              type : 'category',
+              data : ['RPA1', 'RPA2', 'RPA3', 'RPA4', 'RPA5', 'RPA6'],
+              axisTick: {
+                  alignWithLabel: true
+              }
+          }
+      ],
+      yAxis : [
+          {
+              type : 'value'
+          }
+      ],
+      series : [
+          {
+              name:'次数',
+              type:'bar',
+              data:[405, 600, 98, 106, 356, 789],
+          }
+      ]
+    });
+  },
+  destroyed() {
+    this.todayPieChart.dispose();
+    this.todayBarChart.dispose();
+    this.historyPieChart.dispose();
+    this.historyBarChart.dispose();
+  },
   methods: {
     elStepClick(row) {
-      console.log(row);
       this.activeRpaStepCodeOption = {};
       this.activeRpaStepCodeOption = row;
     },
@@ -1056,9 +1162,13 @@ export default {
   color: #14ce14;
 }
 
+.taskMonitor .branchTableRowWorkingClass .el-progress.is-success .el-progress-bar__inner {
+  background-color: #409eff;
+}
+
 .taskMonitor .branchTableRowWorkingClass {
   color: #409eff;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .taskMonitor .branchTableRowWaitingClass {
@@ -1289,4 +1399,14 @@ export default {
 .divGroupBottom .el-card>.el-card__header {
   padding: 5px 20px;
 }
+
+.divGroupTopLeftContent .el-tag {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.divGroupBottom .el-card__body {
+  padding: 5px;
+}
+
 </style>

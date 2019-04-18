@@ -34,13 +34,12 @@
 <style >
   .bottom{
     background: none repeat scroll 0 0 #E9EEF3;
-    position: absolute;
     padding: 10px 60px;
-    top: 70px;
     right: 0;
     left: 0;
     bottom: 0;
     width: auto;
+    height: 100%;
     box-sizing: border-box;
     overflow-y: hidden;
   }
