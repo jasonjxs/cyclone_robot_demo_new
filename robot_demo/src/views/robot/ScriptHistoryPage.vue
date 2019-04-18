@@ -176,24 +176,24 @@
             ]
           },
           {
-            index: '2', title: '测试用',history: [{ commitPeo: '张三', commitTime: '2016-01-21 14:22:43', isSaved: true},], children: [
+            index: '2', title: '财务流水',history: [{ commitPeo: '张三', commitTime: '2016-01-21 14:22:43', isSaved: true},], children: [
               {
                 index: '2-1',
-                title: '一定不会报错的流程',
+                title: '费用报销',
                 history: [{ commitPeo: '张三',commitTime: '2019-02-03 14:22:43',isSaved: true,},
                   { commitPeo: '张三',commitTime: '2019-02-03 14:22:43',isSaved: true,},],
                 children: []
               },
               {
                 index: '2-2',
-                title: '文书敏捷',
+                title: '设备采购',
                 history: [{ commitPeo: '张三', commitTime: '2019-03-03 14:22:43',isSaved: true,},
                   { commitPeo: '张三', commitTime: '2019-03-03 14:22:43',isSaved: true,},],
                 children: []
               },
               {
                 index: '2-3',
-                title: '不会报错的流程',
+                title: '日常收支',
                 history: [{commitPeo: '张三',commitTime: '2019-01-03 14:22:43',isSaved: true,},
                   { commitPeo: '张三',commitTime: '2019-01-03 14:22:43',isSaved: true,},],
                 children: []
@@ -201,164 +201,37 @@
             ]
           },
           {
-            index: '3', title: '结案回填', history: [{commitPeo: '张三', commitTime: '2016-01-21 14:22:43', isSaved: true,},], children: [
+            index: '3', title: '人事管理', history: [{commitPeo: '张三', commitTime: '2016-01-21 14:22:43', isSaved: true,},], children: [
               {
                 index: '3-1',
-                title: '结案回填（案号抓包）0116',
+                title: '人事管理0116',
                 history: [{commitPeo: 'sam',commitTime: '2019-01-03 14:22:43',isSaved: true,},
                   {commitPeo: 'sam',commitTime: '2019-01-03 14:22:43',isSaved: true,},],
                 children: []
               },
               {
                 index: '3-2',
-                title: '结案回填（案号抓包）0115',
+                title: '人事管理0115',
                 history: [{commitPeo: '张三',commitTime: '2017-01-03 14:22:43',isSaved: true,},
                   {commitPeo: '张三',commitTime: '2017-01-03 14:22:43',isSaved: true,},],
                 children: []
               },
               {
                 index: '3-3',
-                title: '结案回填（案号抓包）0117',
+                title: '人事管理0117',
                 history: [{commitPeo: '张三',commitTime: '2016-01-03 14:22:43',isSaved: true,},
                   {commitPeo: '张三',commitTime: '2016-01-03 14:22:43',isSaved: true,},],
                 children: []
               },
               {
                 index: '3-4',
-                title: '结案回填（案号抓包）0114',
+                title: '人事管理0114',
                 history: [{commitPeo: '张三',commitTime: '2018-01-03 14:22:43',isSaved: true,},
                   {commitPeo: '张三',commitTime: '2018-01-03 14:22:43',isSaved: true,},],
                 children: []
               },
             ]
           },
-          {
-            index: '4', title: '文书上网',history: [{commitPeo: '张三', commitTime: '2016-01-21 14:22:43', isSaved: true,},], children: [
-              {
-                index: '4-1',
-                title: '文书提起0116',
-                history: [{commitPeo: '张三',commitTime: '2016-01-03 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-03 14:22:43',isSaved: true,},],
-                children: []
-              },
-              {
-                index: '4-2',
-                title: '文书提起0115',
-                history: [{commitPeo: '张三',commitTime: '2016-01-02 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-02 14:22:43',isSaved: true,},],
-                children: []
-              },
-              {
-                index: '4-3',
-                title: '文书提起0117',
-                history: [{commitPeo: '张三',commitTime: '2016-01-01 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-01 14:22:43',isSaved: true,},],
-                children: []
-              },
-              {
-                index: '4-4',
-                title: '文书提起0114',
-                history: [{commitPeo: '张三',commitTime: '2016-01-04 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-04 14:22:43',isSaved: true,},],
-                children: []
-              },
-              {
-                index: '4-5',
-                title: '文书提起0103',
-                history: [{commitPeo: '张三',commitTime: '2016-01-16 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-16 14:22:43',isSaved: true,},],
-                children: []
-              },
-              {
-                index: '4-6',
-                title: '文书提起0109',
-                history: [{commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},],
-                children: []
-              },
-            ]
-          },
-          {
-            index: '5', title: '测试用', history: [{commitPeo: '张三', commitTime: '2016-01-21 14:22:43', isSaved: true,},], children: [
-              {
-                index: '5-1',
-                title: '一定不会报错的流程',
-                history: [{commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},],
-                children: []
-              },
-              {
-                index: '5-2',
-                title: '文书敏捷',
-                history: [{commitPeo: '张三',commitTime: '2016-01-21 14:22:43', isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-21 14:22:43', isSaved: true,},],
-                children: []
-              },
-              {
-                index: '5-3',
-                title: '不会报错的流程',
-                history: [{commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},],
-                children: []
-              },
-            ]
-          },
-          {
-            index: '6', title: '结案回填', commitPeo: '张三', commitTime: '2016-01-21 14:22:43', isSaved: true, children: [
-              {
-                index: '6-1',
-                title: '结案回填（案号抓包）0116',
-                history: [{commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},],
-                children: []
-              },
-              {
-                index: '6-2',
-                title: '结案回填（案号抓包）0115',
-                history: [{commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},],
-                children: []
-              },
-              {
-                index: '6-3',
-                title: '结案回填（案号抓包）0117',
-                history: [{commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},],
-                children: []
-              },
-              {
-                index: '6-4',
-                title: '结案回填（案号抓包）0114',
-                history: [{commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},],
-                children: []
-              },
-            ]
-          }, {
-            index: '7', title: '文书上网',  history: [{commitPeo: '张三', commitTime: '2016-01-21 14:22:43', isSaved: true,},], children: [
-              {
-                index: '7-1',
-                title: '文书提起0116',
-                history: [{commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},],
-                children: []
-              },
-              {
-                index: '7-2',
-                title: '文书提起0115',
-                history: [{commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},],
-                children: []
-              },
-              {
-                index: '7-3',
-                title: '文书提起0117',
-                history: [{commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},
-                  {commitPeo: '张三',commitTime: '2016-01-21 14:22:43',isSaved: true,},],
-                children: []
-              },
-            ]
-          }
         ],
         selectedMenuOption: {},
         tblHeight: document.body.scrollHeight -380
