@@ -97,7 +97,7 @@
                       type="text"
                       size="small"
                       style="font-size: 12px"
-                      @click="dialogFormVisible = true"
+                      @click="showTaskDialog"
                     >查看</el-button>
                     <!--                  <a style="margin-left: 2px">终止</a>-->
                   </template>
@@ -902,6 +902,8 @@ export default {
     this.activeRpaStepCodeOption = this.taskProcessStep[this.activeRpaStepNum];
   },
   mounted() {
+    this.charts = [];
+
     this.todayPieChart = echarts.init(this.$refs.todayPieChart);
     this.todayPieChart.setOption({
       tooltip: {
@@ -962,6 +964,7 @@ export default {
         }
       ]
     });
+    this.charts.push(this.todayPieChart);
 
     this.todayBarChart = echarts.init(this.$refs.todayBarChart);
     this.todayBarChart.setOption({
@@ -1001,6 +1004,7 @@ export default {
           }
       ]
     });
+    this.charts.push(this.todayBarChart);
 
     this.historyPieChart = echarts.init(this.$refs.historyPieChart);
     this.historyPieChart.setOption({
@@ -1036,6 +1040,7 @@ export default {
         },
       ]
     });
+    this.charts.push(this.historyPieChart);
 
     this.historyBarChart = echarts.init(this.$refs.historyBarChart);
     this.historyBarChart.setOption({
@@ -1075,14 +1080,20 @@ export default {
           }
       ]
     });
+    this.charts.push(this.historyBarChart);
   },
   destroyed() {
-    this.todayPieChart.dispose();
-    this.todayBarChart.dispose();
-    this.historyPieChart.dispose();
-    this.historyBarChart.dispose();
+    for (const chart of this.charts) {
+      chart.dispose();
+    }
   },
   methods: {
+    showTaskDialog() {
+      for (const chart of this.charts) {
+        chart.dispatchAction({ type: 'hideTip' });
+      }
+      this.$data.dialogFormVisible = true;
+    },
     elStepClick(row) {
       this.activeRpaStepCodeOption = {};
       this.activeRpaStepCodeOption = row;
