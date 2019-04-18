@@ -945,16 +945,16 @@ export default {
           type: 'pie',
           seletedMode: 'single',
           radius: ['40%', '55%'],
-          label: {
-            normal: {
-              show: false
-            }
-          },
-          labelLine: {
-            normal: {
-              show: false
-            }
-          },
+          // label: {
+          //   normal: {
+          //     show: false
+          //   }
+          // },
+          // labelLine: {
+          //   normal: {
+          //     show: false
+          //   }
+          // },
           data: [
             { value: 120, name: '已完成' },
             { value: 30, name: '待运行' }
@@ -1018,16 +1018,16 @@ export default {
           name: '任务状态',
           type: 'pie',
           radius: '55%',
-          label: {
-            normal: {
-              show: false
-            }
-          },
-          labelLine: {
-            normal: {
-              show: false
-            }
-          },
+          // label: {
+          //   normal: {
+          //     fontSize: 10
+          //   }
+          // },
+          // labelLine: {
+          //   normal: {
+          //     show: false
+          //   }
+          // },
           data: [
             { value: 2001, name: '成功' },
             { value: 102, name: '失败' },
